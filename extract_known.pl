@@ -4,7 +4,7 @@ my (@tmp, @tmp2, %omim_pheno, $cnt, @arr,@tmp, %tm, $line, %tm_pairs, $key, %map
 my (%sup, @omim_list, @pheno_list, $omim, $pheno);
 
 
-open IN, "../propagate/coding19.tsv" or die "coding19.tsv";
+open IN, "coding19.tsv" or die "coding19.tsv";
 #A009    A00.9 Cholera, unspecified      289     286     Y
 while ($line=<IN>)
 {chomp $line;
@@ -13,8 +13,8 @@ while ($line=<IN>)
 if ($tmp[0]=~/\./) {@tmp2=split('\.',$tmp[0]); $sup{$tmp[0]}=$tmp2[0]; } #$tmp2[0] contains supper class
 }
 close IN;
-   
-open IN, "./wikidata/ICD10_sympthoms.txt" or die "wikidata";
+   #wikidata
+open IN, "ICD10_sympthoms.txt" or die "wikidata sympthoms";
 #A77.4   HP:0002315##HP:0002018
 while ($line=<IN>)
 {chomp $line;
@@ -29,7 +29,7 @@ foreach $key (@tmp)
 close IN;
 
 
-open IN, "./wikidata/ICD10_secondary.txt" or die "wikidata";
+open IN, "ICD10_secondary.txt" or die "wikidata seconday data";
 while ($line=<IN>)
 {chomp $line;
 @arr=split("\t", $line);
@@ -42,7 +42,7 @@ foreach $key (@tmp)
 close IN;
 
 my $tt;
-open IN, "./umls_icd_hpo/umls_icd_hpo.txt" or die "cannot ope direct mappigs";
+open IN, "umls_icd_hpo.txt" or die "cannot open direct mappigs";
 while ($line=<IN>)
 {chomp $line;
 @arr=split("\t", $line);
@@ -56,7 +56,7 @@ foreach $tt (@tmp)
 #print"---------ADDING OMIM-ICD10 MAPPING information from UMLS + WIKIDATA------------\n";
 #getting omim-phenotypes from HPO
 
-open IN, "./hpo_dis_pheno_umls_map/HPO_omim_phenotypes.txt" or die "cannot open HPO_omim_phenotypes.txt\n";
+open IN, "HPO_omim_phenotypes.txt" or die "cannot open HPO_omim_phenotypes.txt\n";
 while ($line=<IN>)
 { chomp $line;
 @arr=split("\t", $line);
@@ -66,7 +66,7 @@ $omim_pheno{$arr[0]}=$arr[1]; # omim->hp_list
 close IN;
 
 
-open IN, "./wikidata/ICD10_omim.mapping.final.txt" or die "cannot open wikidata mapping";
+open IN, "ICD10_omim.mapping.final.txt" or die "cannot open wikidata mappings file";
 while ($line=<IN>)
 { chomp $line;
 @arr=split("\t", $line);
@@ -75,7 +75,7 @@ $map{"ICD10:".$arr[0]}=$arr[1]; # icd->omimlist
 close IN;
 #print scalar (keys %map); print " ICD10 are mapped to omim in wikidata\n";
 
-open IN, "./hpo_dis_pheno_umls_map/icd_omim_inumls.map" or die "cannot open icd_omim_inumls.map\n";
+open IN, "icd_omim_inumls.map" or die "cannot open icd_omim_inumls.map\n";
 #Essential (primary) hypertension        ICD10:I10       OMIM:145500
 while ($line=<IN>)
 { chomp $line;
