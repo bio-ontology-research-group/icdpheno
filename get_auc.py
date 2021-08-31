@@ -18,10 +18,10 @@ def negcum(rank_vec):
 	rank_vec_cum = np.array(rank_vec_cum)
 	return rank_vec_cum
 
-diseases = np.genfromtxt('/umls_phenotypes/HPO_gold/hpo.icd.list.txt', dtype = 'str')
-genes = np.genfromtxt('tm.icd.list.txt', dtype = 'str')
+diseases = np.genfromtxt('/umls_phenotypes/HPO_gold/icd.list.txt', dtype = 'str')
+genes = np.genfromtxt('gene.list.txt', dtype = 'str')
 # cosine similarity scores for gene-disease vector embeddings
-sim_scores = np.loadtxt("/umls_phenotypes/similarity/simscores/simscores.icd-pheno.TMrank"+sys.argv[1]+".txt", dtype = 'float32')
+sim_scores = np.loadtxt("/umls_phenotypes/similarity/simscores/simscores.icd-pheno.rank"+sys.argv[1]+".MGI.disease_gene.txt", dtype = 'float32')
 
 
 
